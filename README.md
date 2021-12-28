@@ -14,6 +14,11 @@
 
 # QmlSqlQueryModel
 　　C++中的SQL处理的Model,QML可直接进行加载展示。
+
 # SinPlot
 　　水球状的百分比控件，因此用Canvas画了一个，原理比较简单，底层画一个正弦波，上面覆盖一个圆，然后两个图层Clip后即可得到需要的形状，代码较为简单，该控件可修改前景色、背景色、球体边框颜色；可自定义是否开启水波动画等功能（水波动画由计时器重绘而成，讲究效率的代码中不建议开启，建议在数据改变时设置数值的方式添加动态效果）</br>
 ![](https://img-blog.csdnimg.cn/20200803170601827.gif)
+
+# VLC-Qt-QML
+在QML中使用VLC播放网络流视频，详细介绍见博客[QML中使用VLC](https://blog.csdn.net/zjgo007/article/details/107534075?spm=1001.2014.3001.5501)，效果图：</br>
+![](https://img-blog.csdnimg.cn/20200723130014344.gif)
