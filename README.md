@@ -22,3 +22,8 @@
 # VLC-Qt-QML
 在QML中使用VLC播放网络流视频，详细介绍见博客[QML中使用VLC](https://blog.csdn.net/zjgo007/article/details/107534075?spm=1001.2014.3001.5501)，效果图：</br>
 ![](https://img-blog.csdnimg.cn/20200723130014344.gif)
+
+# LocationMap
+　　在线加载地图，支持输入经纬度，点击地图获取地理位置，根据位置添加覆盖图，支持地图测距，中心点保存等功能，方便布局规划，适合电商网点布局，覆盖中心规划等场景需求！由于默认的osm库的street map源地址已失效无法访问,可修改地图源地址或地图类型，效果展示：</br>
+![](https://img-blog.csdnimg.cn/20200706231351292.gif)
+

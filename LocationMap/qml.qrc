@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>MyCircle.qml</file>
+        <file>location.png</file>
+    </qresource>
+</RCC>
