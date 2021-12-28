@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>DataSlider.qml</file>
+        <file>Img/pause.png</file>
+        <file>Img/play.png</file>
+        <file>Img/speeddown.png</file>
+        <file>Img/speedup.png</file>
+        <file>Img/stop.png</file>
+        <file>qtquickcontrols2.conf</file>
+    </qresource>
+</RCC>
