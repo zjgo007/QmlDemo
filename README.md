@@ -1,6 +1,10 @@
 # QmlDemo
 配合博客的一些示例程序，博客地址https://blog.csdn.net/zjgo007
 
+# MyMapVectorLine
+ 　　Qml地图中提供了MapPolyline用于在地图上绘制路线，但是该控件无法显示目标的方位矢量，因此我在MapPolyline的基础上制作了MyMapVectorLine，该控件可自定义矢量标志图片样式,并根据存入数据自动计算标志方位朝向，组件颜色和标志可动态设置，效果如图：</br>
+![](https://img-blog.csdnimg.cn/609682e0c80c40f8b852345bcd2d1690.gif)
+
 # MyTimePieChart
 　　嵌套甜甜圈图，每个小圈内的切片具有相同角度，每个切片采用不同颜色（热力值）代表该切片处数值的大小，该图表适用于展示具有相同周期的重复数据的密度，应用于例如连续多日的24小时各时段数据密度等场景，Demo效果图：</br>
 　　![热力甜甜圈图](https://img-blog.csdnimg.cn/3ab837a34e1441da88414ff766e1686e.gif#pic_center)
