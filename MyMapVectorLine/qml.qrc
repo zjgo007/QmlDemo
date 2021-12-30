@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>MyMapVectorLine.qml</file>
+        <file>Image/bike.png</file>
+        <file>Image/car.png</file>
+        <file>Image/gps.png</file>
+        <file>Image/plane.png</file>
+        <file>Image/pause.png</file>
+        <file>Image/play.png</file>
+        <file>Image/replay.png</file>
+    </qresource>
+</RCC>
