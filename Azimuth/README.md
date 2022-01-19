@@ -10,6 +10,8 @@
 > beginAngle：设置表盘刻度起始方位角，默认为（330）
 > 
 > spanAngle：设置表盘刻度拓展角度，默认为（240）
+>
+>dialTextPoint：设置表盘数字大小
 
 ### 方法
 > void appendPointer(const qreal angle, const QColor color, const QString name):往控件中添加新的数据指针【angle:方位夹角（取值范围：-3~3）；color:指针颜色；name:指针名称】
@@ -17,4 +19,11 @@
 > void changePointerData(const QString name,const qreal angle)：根据指针名修改指针数值
 > 
 > void clear()：清除表盘中所有数据指针
+>
+>void remove(const QString name)：根据指针名删除指针
+>
+> void pointerVisible(const QString name, const bool visible)：根据指针名进行隐藏/显示
 > 
+> void showAllPointer()：显示所有指针
+> 
+> void hideAllPointer()：隐藏所有指针
