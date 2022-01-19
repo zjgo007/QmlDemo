@@ -13,6 +13,8 @@ AzimuthDial::AzimuthDial(QQuickItem *parent):QQuickPaintedItem(parent)
     mDialPointerColor = "#00ffff";
     mTitle = "电子校北仪\nGPS(°)";
     mTitleTextPoint = 18;
+    mCrossSize = 10;
+    mCrossType = Middle;
 }
 
 AzimuthDial::~AzimuthDial()
@@ -26,11 +28,13 @@ void AzimuthDial::paint(QPainter *painter)
     painter->setRenderHint(QPainter::Antialiasing);
     painter->setRenderHint(QPainter::SmoothPixmapTransform);
     painter->translate(this->width()/2,this->height()/2);
+//    painter->rotate(-90);
     radius = qMin(this->width(),this->height())/2;
     drawBgLightColor(painter);
     drawScaleBgColor(painter);
     drawSlideBarColor(painter);
     drawDialCenterCross(painter);
+
     drawDialRule(painter);
     drawDialText(painter);
     drawPointer(painter);
@@ -39,7 +43,7 @@ void AzimuthDial::paint(QPainter *painter)
 
 void AzimuthDial::appendPointer(const qreal angle, const QColor color,const QString name)
 {
-    PointerData data = {name,color,angle};
+    PointerData data = {name,color,angle,true};
     mVector.append(data);
     update();
 }
@@ -48,6 +52,18 @@ void AzimuthDial::clear()
 {
     mVector.clear();
     update();
+}
+
+void AzimuthDial::remove(const QString name)
+{
+    for(int i=0;i<mVector.size();i++){
+        PointerData &pointer = mVector[i];
+        if(pointer.name == name){
+            mVector.remove(i);
+            update();
+            break;
+        }
+    }
 }
 
 void AzimuthDial::changePointerData(const QString name, const qreal angle)
@@ -60,6 +76,37 @@ void AzimuthDial::changePointerData(const QString name, const qreal angle)
         }
     }
 }
+
+void AzimuthDial::pointerVisible(const QString name,const bool v)
+{
+    for(int i=0;i<mVector.size();i++){
+        PointerData &pointer = mVector[i];
+        if(pointer.name == name){
+            pointer.visible = v;
+            update();
+        }
+    }
+}
+
+void AzimuthDial::showAllPointer()
+{
+    for(int i=0;i<mVector.size();i++){
+        PointerData &pointer = mVector[i];
+        pointer.visible = true;
+        update();
+    }
+}
+
+void AzimuthDial::hideAllPointer()
+{
+    for(int i=0;i<mVector.size();i++){
+        PointerData &pointer = mVector[i];
+        pointer.visible = false;
+        update();
+    }
+}
+
+
 
 int AzimuthDial::startAngle() const
 {
@@ -103,6 +150,40 @@ void AzimuthDial::setTitlePoint(const int point)
 {
     mTitleTextPoint = point;
     emit titlePointChanged();
+}
+
+int AzimuthDial::dialTextPoint() const
+{
+    return mDialTextPoint;
+}
+
+void AzimuthDial::setDialTextPoint(const int point)
+{
+    mDialTextPoint = point;
+    emit dialTextPointChanged();
+}
+
+AzimuthDial::CrossSize AzimuthDial::crossSize() const
+{
+    return mCrossType;
+}
+
+void AzimuthDial::setCrossSize(const CrossSize size)
+{
+    mCrossType = size;
+    switch (size) {
+    case Small:
+        mCrossSize = 6;
+        break;
+    case Middle:
+        mCrossSize = 10;
+        break;
+    case Big:
+        mCrossSize = 14;
+        break;
+    }
+    emit crossSizeChanged();
+    update();
 }
 
 void AzimuthDial::drawBgLightColor(QPainter *painter)
@@ -257,6 +338,13 @@ void AzimuthDial::drawPointer(QPainter *painter)
         qreal angle = data.angle;
         QColor color = data.color;
         QString name = data.name;
+        bool visible = data.visible;
+        if(!visible)
+            continue;
+        if(angle>3)
+            angle=3;
+        if(angle<-3)
+            angle=-3;
         qreal r = 90 - angle*(mSpanAngle/6);
         painter->rotate(-r);
         painter->setBrush(color);
@@ -282,12 +370,14 @@ void AzimuthDial::drawDialCenterColor(QPainter *painter)
     pen.setWidth(2);
     painter->setPen(pen);
     painter->setFont(QFont("微软雅黑",mTitleTextPoint,QFont::DemiBold));
-    painter->drawText(QRectF(-100,centerRadius*2,200,60),Qt::AlignHCenter|Qt::AlignVCenter,mTitle);
+    painter->drawText(QRectF(-100,centerRadius*2,200,60),Qt::AlignHCenter,mTitle);
 
     QImage pixmapGPS(":/gps.png");
     painter->drawImage(QRectF(-centerRadius,-centerRadius,centerRadius*2,centerRadius*2),pixmapGPS,QRectF(0,0,79,79));
     QImage pixmapLogo(":/logo.png");
-    painter->drawImage(QRectF(-centerRadius*3.2,centerRadius*2+70,centerRadius*6.4,centerRadius*3),pixmapLogo,QRectF(0,0,300,128));
+    painter->drawImage(QRectF(-centerRadius*3.2,centerRadius*5,centerRadius*6.4,centerRadius*3),pixmapLogo,QRectF(0,0,531,236));
+//    QImage pixmapLogo(":/Logo.ico");
+//    painter->drawImage(QRectF(-centerRadius*2.5,centerRadius*2+70,centerRadius*5,centerRadius*4),pixmapLogo,QRectF(0,0,512,512));
 }
 
 void AzimuthDial::drawDialCenterCross(QPainter *painter)
@@ -304,8 +394,8 @@ void AzimuthDial::drawDialCenterCross(QPainter *painter)
     gradientV.setColorAt(0.5,"#00fa9a");
     gradientV.setColorAt(1,"#3300fa9a");
     painter->setBrush(gradientH);
-    painter->drawRect(-crossRadiusBrush,-10,crossRadiusBrush*2,20);
+    painter->drawRect(-crossRadiusBrush,-mCrossSize,crossRadiusBrush*2,mCrossSize*2);
     painter->setBrush(gradientV);
-    painter->drawRect(-10,-crossRadiusBrush,20,crossRadiusBrush);
+    painter->drawRect(-mCrossSize,-crossRadiusBrush,mCrossSize*2,crossRadiusBrush);
 
 }
