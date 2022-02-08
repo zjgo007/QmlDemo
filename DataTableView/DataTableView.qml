@@ -1,6 +1,7 @@
-import QtQuick 2.11
+﻿import QtQuick 2.11
 import QtQuick.Controls 2.4
 
+/*数据更新前，设置DataTableView.model=[],新数据加载时表格会根据新数据重新计算表头*/
 ListView {
     id: listView
     clip: true
@@ -8,9 +9,30 @@ ListView {
     headerPositioning: ListView.OverlayHeader
     flickableDirection: Flickable.AutoFlickDirection
     contentWidth: headerList.length*columnsWidth
-    ScrollBar.horizontal: ScrollBar {}
-    ScrollBar.vertical: ScrollBar { }
-    property var headerList: model.isSqlModel?model.getHeaderList():Object.keys(model.get(0)).reverse()
+    ScrollBar.horizontal: ScrollBar {
+        policy: scrollBarHorizontalVisible ? ScrollBar.AlwaysOn:ScrollBar.AlwaysOff
+        contentItem: Rectangle {
+            color: scrollBarColor
+        }
+        background: Rectangle{
+            implicitWidth: listView.width
+            implicitHeight: 15
+            color: scrollBarBgColor
+        }
+    }
+    ScrollBar.vertical: ScrollBar{
+        policy: scrollBarVerticalVisible ? ScrollBar.AlwaysOn:ScrollBar.AlwaysOff
+        contentItem: Rectangle {
+            color: scrollBarColor
+        }
+        background: Rectangle{
+            implicitWidth: 15
+            implicitHeight: listView.height
+            color: scrollBarBgColor
+        }
+    }
+
+    property var headerList: model.isQmlModel?model.getHeaderList():Object.keys(model.get(0)).reverse()
     property int columnsWidth: 100
     property int headerHeight: 40
     property int rowsHeight: 30
@@ -25,6 +47,14 @@ ListView {
     property color textColor: "ghostwhite"
     property int textSize: 11
     property string textFontFamily: "微软雅黑"
+    property color scrollBarBgColor: "#cc17719b"
+    property color scrollBarColor: "turquoise"
+    property bool scrollBarHorizontalVisible: true
+    property bool scrollBarVerticalVisible: true
+
+    //    property var modelColumnsList: model.isQmlModel?model.getHeaderList():Object.keys(model.get(0)).reverse()
+
+
     boundsBehavior: Flickable.StopAtBounds
 
     move: Transition {
@@ -70,7 +100,7 @@ ListView {
             height: rowsHeight
             color: index%2 ==0 ? backgroundColor:alternateBackgroundColor
             property var myModel: model
-            property var modelColumnsList: listView.model.isSqlModel?listView.model.getHeaderList():Object.keys(listView.model.get(0)).reverse()
+            property var modelColumnsList: listView.model.isQmlModel?listView.model.getHeaderList():Object.keys(listView.model.get(0)).reverse()
             Row{
                 Repeater{
                     id:delegateRepeater
@@ -79,7 +109,7 @@ ListView {
                         width: listView.headerItem.headerRepeater.itemAt(index).width
                         height: rowsHeight
                         color: textColor
-                        text:myModel[modelColumnsList[index]]
+                        text:typeof(myModel[modelColumnsList[index]])!="undefined"?myModel[modelColumnsList[index]]:""
                         font.bold: true
                         verticalAlignment: Text.AlignVCenter
                         horizontalAlignment: Text.AlignHCenter
@@ -102,13 +132,22 @@ ListView {
 
     function setColumnWidth(index,width){
         var headerItem = listView.headerItem.headerRepeater.itemAt(index)
-        contentWidth = contentWidth - headerItem.width+width
+        listView.contentWidth = listView.contentWidth - headerItem.width+width
         headerItem.width = width
     }
 
     function getColumnWidth(index){
         var headerItem = listView.headerItem.headerRepeater.itemAt(index)
         return headerItem.width
+    }
+
+    function clear(){
+        listView.model = []
+    }
+
+    function setHeaderList(list){
+        listView.headerList = list
+        contentWidth =list.length*listView.columnsWidth
     }
 
 }
