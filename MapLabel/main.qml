@@ -39,6 +39,7 @@ Window {
         zoomLevel: 6
         color: "#00000000"
         copyrightsVisible: false
+        activeMapType:supportedMapTypes[1]
 
         MapPolyline{
             id:mapPolyline

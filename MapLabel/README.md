@@ -1,6 +1,6 @@
 # QML 地图可拖拽位置标签组件
 在地图上显示位置信息时，有时候需要同时显示该位置的详细信息。该组件可在地图上显示一个连接到地图地理位置的标签框，该标签框可点击进行拖拽。在地理位置改变、地图缩放、地图平移时，该标签框的相对位置保持不变。（注意：该组件父类必须为Map）如图：效果如图：</br>
-![](https://img-blog.csdnimg.cn/cb29a6b54e974bb3852cfb974db7cf1a.gif)</br>
+![](https://github.com/zjgo007/QmlDemo/blob/master/MapLabel/MapLabe.gif)</br>
 　　
 ### 属性
 > name：组件名，用于查找组件
