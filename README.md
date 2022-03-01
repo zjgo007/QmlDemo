@@ -3,7 +3,7 @@
 
 # MapLabel
 　　在地图上显示位置信息时，有时候需要同时显示该位置的详细信息。该组件可在地图上显示一个连接到地图地理位置的标签框，该标签框可点击进行拖拽。在地理位置改变、地图缩放、地图平移时，该标签框的相对位置保持不变。</br>
-![MapLabel](https://img-blog.csdnimg.cn/cb29a6b54e974bb3852cfb974db7cf1a.gif)
+![MapLabel](https://github.com/zjgo007/QmlDemo/blob/master/MapLabel/MapLabe.gif)
 
 # AzimuthDial
 　　校北仪用于显示不同设备与参照方位之间的误差夹角，如果仅仅使用柱状图显示多个不同设备误差的数值，数据不够直观表示，因此自己画一个，效果如图该控件使用QQuickPaintedItem进行绘制后在QML中进行使用，相关部分参数已提供设置接口供QML中调用，如果该控件需要在QWidget中使用，将QQuickPaintedItem修改为QWidget即可。在Demo中演示了如何添加不同方位夹角，不同颜色的指针，并根据指针名称动态修改数据。</br>
