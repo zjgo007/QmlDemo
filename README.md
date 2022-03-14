@@ -2,7 +2,7 @@
 配合博客的一些示例程序，博客地址https://blog.csdn.net/zjgo007
 
 # ResizableRectangle
-　　该组件继承至Rectangle，鼠标置于边框和顶点位置时鼠标样式对应改变，拖动边框可修改该方向组件大小，拖动顶点可修改组件处横纵向组件大小。组件内部拖动可修改组件相对于父类的位置。</br>
+　　 QML项目开发过程中，有时候需要对控件大小和位置‘进行人为调整，因此设计该组件。该组件鼠标置于边框和顶点位置时鼠标样式对应改变，拖动边框可修改该方向组件大小，拖动顶点可修改组件处横纵向组件大小。</br>
 ![ResizableRectangle](https://img-blog.csdnimg.cn/5b64d9d45e5e49ad8ec69995290f4304.gif)
 
 # MapLabel
