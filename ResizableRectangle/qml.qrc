@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>ResizableRectangle.qml</file>
+        <file>qt-logo.jpg</file>
     </qresource>
 </RCC>

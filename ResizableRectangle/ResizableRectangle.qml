@@ -1,19 +1,12 @@
 ﻿import QtQuick 2.0
 
-Rectangle {
+Item {
     id:rect
-    color: "#00000000"
-    border.width: 1
-    property bool dragEnabled: true
-    property bool resizeEnabled: true
     property int minimumWidth: 50
     property int minimumHeight: 50
     property int mouseRegion: 5
-    MouseArea{
-        anchors.fill: parent
-        drag.target: rect
-        enabled: dragEnabled
-    }
+    property var resizeTarget: rect
+    anchors.fill: resizeTarget
 
     MouseArea {
         id:leftX
@@ -24,8 +17,7 @@ Rectangle {
         anchors.leftMargin: 0
         anchors.bottomMargin: 0
         anchors.topMargin: 0
-        cursorShape: resizeEnabled ? Qt.SizeHorCursor:Qt.ArrowCursor
-        enabled: resizeEnabled
+        cursorShape: Qt.SizeHorCursor
         property int xPosition: 0
         onPressed: {
             xPosition = mouse.x
@@ -33,9 +25,9 @@ Rectangle {
 
         onPositionChanged: {
             var xOffset = mouse.x-xPosition
-            if(rect.x+xOffset>0 && rect.width-xOffset>minimumWidth){
-                rect.x = rect.x+xOffset
-                rect.width = rect.width-xOffset
+            if(rect.resizeTarget.x+xOffset>0 && rect.resizeTarget.width-xOffset>minimumWidth){
+                rect.resizeTarget.x = rect.resizeTarget.x+xOffset
+                rect.resizeTarget.width = rect.resizeTarget.width-xOffset
             }
         }
     }
@@ -49,8 +41,7 @@ Rectangle {
         anchors.bottomMargin: 0
         anchors.topMargin: 0
         anchors.rightMargin: 0
-        cursorShape: resizeEnabled ? Qt.SizeHorCursor:Qt.ArrowCursor
-        enabled: resizeEnabled
+        cursorShape: Qt.SizeHorCursor
         property int xPosition: 0
         onPressed: {
             xPosition = mouse.x
@@ -58,9 +49,9 @@ Rectangle {
 
         onPositionChanged: {
             var xOffset = mouse.x-xPosition
-            var xWidth = rect.width+xOffset
-            if(xWidth+rect.x<rect.parent.width && xWidth>minimumWidth){
-                rect.width = xWidth
+            var xWidth = rect.resizeTarget.width+xOffset
+            if(xWidth+rect.resizeTarget.x<rect.resizeTarget.parent.width && xWidth>minimumWidth){
+                rect.resizeTarget.width = xWidth
             }
         }
     }
@@ -74,8 +65,7 @@ Rectangle {
         anchors.rightMargin: 0
         anchors.leftMargin: 0
         anchors.topMargin: 0
-        cursorShape: resizeEnabled ? Qt.SizeVerCursor:Qt.ArrowCursor
-        enabled: resizeEnabled
+        cursorShape: Qt.SizeVerCursor
         property int yPosition: 0
         onPressed: {
             yPosition = mouse.y
@@ -83,9 +73,9 @@ Rectangle {
 
         onPositionChanged: {
             var yOffset = mouse.y-yPosition
-            if(rect.y+yOffset>0 && rect.height-yOffset>minimumHeight){
-                rect.y = rect.y+yOffset
-                rect.height = rect.height-yOffset
+            if(rect.resizeTarget.y+yOffset>0 && rect.resizeTarget.height-yOffset>minimumHeight){
+                rect.resizeTarget.y = rect.resizeTarget.y+yOffset
+                rect.resizeTarget.height = rect.resizeTarget.height-yOffset
             }
         }
     }
@@ -99,8 +89,7 @@ Rectangle {
         anchors.rightMargin: 0
         anchors.leftMargin: 0
         anchors.bottomMargin: 0
-        cursorShape: resizeEnabled ? Qt.SizeVerCursor:Qt.ArrowCursor
-        enabled: resizeEnabled
+        cursorShape: Qt.SizeVerCursor
         property int yPosition: 0
         onPressed: {
             yPosition = mouse.y
@@ -108,9 +97,9 @@ Rectangle {
 
         onPositionChanged: {
             var yOffset = mouse.y-yPosition
-            var yHeight = rect.height+yOffset
-            if(yHeight+rect.y<rect.parent.height && yHeight>minimumHeight){
-                rect.height = yHeight
+            var yHeight = rect.resizeTarget.height+yOffset
+            if(yHeight+rect.resizeTarget.y<rect.resizeTarget.parent.height && yHeight>minimumHeight){
+                rect.resizeTarget.height = yHeight
             }
         }
     }
@@ -122,8 +111,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.topMargin: 0
         anchors.leftMargin: 0
-        cursorShape: resizeEnabled ? Qt.SizeFDiagCursor:Qt.ArrowCursor
-        enabled: resizeEnabled
+        cursorShape: Qt.SizeFDiagCursor
         property int xPosition: 0
         property int yPosition: 0
         onPressed: {
@@ -133,14 +121,14 @@ Rectangle {
 
         onPositionChanged: {
             var xOffset = mouse.x-xPosition
-            if(rect.x+xOffset>0 && rect.width-xOffset>minimumWidth){
-                rect.x = rect.x+xOffset
-                rect.width = rect.width-xOffset
+            if(rect.resizeTarget.x+xOffset>0 && rect.resizeTarget.width-xOffset>minimumWidth){
+                rect.resizeTarget.x = rect.resizeTarget.x+xOffset
+                rect.resizeTarget.width = rect.resizeTarget.width-xOffset
             }
             var yOffset = mouse.y-yPosition
-            if(rect.y+yOffset>0 && rect.height-yOffset>minimumHeight){
-                rect.y = rect.y+yOffset
-                rect.height = rect.height-yOffset
+            if(rect.resizeTarget.y+yOffset>0 && rect.resizeTarget.height-yOffset>minimumHeight){
+                rect.resizeTarget.y = rect.resizeTarget.y+yOffset
+                rect.resizeTarget.height = rect.resizeTarget.height-yOffset
             }
         }
     }
@@ -152,8 +140,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.topMargin: 0
         anchors.rightMargin: 0
-        cursorShape: resizeEnabled ? Qt.SizeBDiagCursor:Qt.ArrowCursor
-        enabled: resizeEnabled
+        cursorShape: Qt.SizeBDiagCursor
         property int xPosition: 0
         property int yPosition: 0
         onPressed: {
@@ -163,14 +150,14 @@ Rectangle {
 
         onPositionChanged: {
             var xOffset = mouse.x-xPosition
-            var xWidth = rect.width+xOffset
-            if(xWidth+rect.x<rect.parent.width && xWidth>minimumWidth){
-                rect.width = xWidth
+            var xWidth = rect.resizeTarget.width+xOffset
+            if(xWidth+rect.resizeTarget.x<rect.resizeTarget.parent.width && xWidth>minimumWidth){
+                rect.resizeTarget.width = xWidth
             }
             var yOffset = mouse.y-yPosition
-            if(rect.y+yOffset>0 && rect.height-yOffset>minimumHeight){
-                rect.y = rect.y+yOffset
-                rect.height = rect.height-yOffset
+            if(rect.resizeTarget.y+yOffset>0 && rect.resizeTarget.height-yOffset>minimumHeight){
+                rect.resizeTarget.y = rect.resizeTarget.y+yOffset
+                rect.resizeTarget.height = rect.resizeTarget.height-yOffset
             }
         }
     }
@@ -183,7 +170,6 @@ Rectangle {
         anchors.leftMargin: 0
         anchors.bottomMargin: 0
         cursorShape: Qt.SizeBDiagCursor
-        enabled: resizeEnabled
         property int xPosition: 0
         property int yPosition: 0
         onPressed: {
@@ -192,14 +178,14 @@ Rectangle {
         }
         onPositionChanged: {
             var xOffset = mouse.x-xPosition
-            if(rect.x+xOffset>0 && rect.width-xOffset>minimumWidth){
-                rect.x = rect.x+xOffset
-                rect.width = rect.width-xOffset
+            if(rect.resizeTarget.x+xOffset>0 && rect.resizeTarget.width-xOffset>minimumWidth){
+                rect.resizeTarget.x = rect.resizeTarget.x+xOffset
+                rect.resizeTarget.width = rect.resizeTarget.width-xOffset
             }
             var yOffset = mouse.y-yPosition
-            var yHeight = rect.height+yOffset
-            if(yHeight+rect.y<rect.parent.height && yHeight>minimumHeight){
-                rect.height = yHeight
+            var yHeight = rect.resizeTarget.height+yOffset
+            if(yHeight+rect.resizeTarget.y<rect.resizeTarget.parent.height && yHeight>minimumHeight){
+                rect.resizeTarget.height = yHeight
             }
         }
     }
@@ -212,8 +198,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.rightMargin: 0
         anchors.bottomMargin: 0
-        cursorShape: resizeEnabled ? Qt.SizeFDiagCursor:Qt.ArrowCursor
-        enabled: resizeEnabled
+        cursorShape: Qt.SizeFDiagCursor
         property int xPosition: 0
         property int yPosition: 0
         onPressed: {
@@ -222,14 +207,14 @@ Rectangle {
         }
         onPositionChanged: {
             var xOffset = mouse.x-xPosition
-            var xWidth = rect.width+xOffset
-            if(xWidth+rect.x<rect.parent.width && xWidth>minimumWidth){
-                rect.width = xWidth
+            var xWidth = rect.resizeTarget.width+xOffset
+            if(xWidth+rect.resizeTarget.x<rect.resizeTarget.parent.width && xWidth>minimumWidth){
+                rect.resizeTarget.width = xWidth
             }
             var yOffset = mouse.y-yPosition
-            var yHeight = rect.height+yOffset
-            if(yHeight+rect.y<rect.parent.height && yHeight>minimumHeight){
-                rect.height = yHeight
+            var yHeight = rect.resizeTarget.height+yOffset
+            if(yHeight+rect.resizeTarget.y<rect.resizeTarget.parent.height && yHeight>minimumHeight){
+                rect.resizeTarget.height = yHeight
             }
         }
     }
