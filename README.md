@@ -1,6 +1,10 @@
 # QmlDemo
 配合博客的一些示例程序，博客地址https://blog.csdn.net/zjgo007
 
+# MapPainterPath
+　　QML地图Map中提供了供绘制图形的组件，例如MapPolyline，MapCircle等，但是这些组件在绘制复杂轨迹时就显得功能不够全面，因此我们将QPainterPath在Map中进行使用并进行绘制，并使用C++和Qml中的函数进行相互调用计算获取点屏幕坐标和经纬度坐标。例子中使用了QPainterPath的QPainterPath::pointAtPercent获取绘制的轨迹全过程中的各个位置的经纬度。</br>
+![MapPainterPath](https://img-blog.csdnimg.cn/fc21e807075e459aad68f14410ea56d7.gif)
+
 # ResizableRectangle
 　　 QML项目开发过程中，有时候需要对控件大小和位置‘进行人为调整，因此设计该组件。该组件鼠标置于边框和顶点位置时鼠标样式对应改变，拖动边框可修改该方向组件大小，拖动顶点可修改组件处横纵向组件大小。</br>
 ![ResizableRectangle](https://img-blog.csdnimg.cn/5b64d9d45e5e49ad8ec69995290f4304.gif)
