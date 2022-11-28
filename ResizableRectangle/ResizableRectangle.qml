@@ -1,4 +1,5 @@
 ﻿import QtQuick 2.0
+import QtQuick.Window 2.15
 
 Item {
     id:rect
@@ -50,7 +51,8 @@ Item {
         onPositionChanged: {
             var xOffset = mouse.x-xPosition
             var xWidth = rect.resizeTarget.width+xOffset
-            if(xWidth+rect.resizeTarget.x<rect.resizeTarget.parent.width && xWidth>minimumWidth){
+            var availableWidth = rect.resizeTarget.parent ? rect.resizeTarget.parent.width:Screen.desktopAvailableWidth
+            if(xWidth+rect.resizeTarget.x<availableWidth && xWidth>minimumWidth){
                 rect.resizeTarget.width = xWidth
             }
         }
@@ -98,7 +100,8 @@ Item {
         onPositionChanged: {
             var yOffset = mouse.y-yPosition
             var yHeight = rect.resizeTarget.height+yOffset
-            if(yHeight+rect.resizeTarget.y<rect.resizeTarget.parent.height && yHeight>minimumHeight){
+            var availableHeight = rect.resizeTarget.parent ? rect.resizeTarget.parent.height : Screen.desktopAvailableHeight
+            if(yHeight+rect.resizeTarget.y<availableHeight && yHeight>minimumHeight){
                 rect.resizeTarget.height = yHeight
             }
         }
@@ -151,7 +154,10 @@ Item {
         onPositionChanged: {
             var xOffset = mouse.x-xPosition
             var xWidth = rect.resizeTarget.width+xOffset
-            if(xWidth+rect.resizeTarget.x<rect.resizeTarget.parent.width && xWidth>minimumWidth){
+            var availableWidth = rect.resizeTarget.parent ? rect.resizeTarget.parent.width:Screen.desktopAvailableWidth
+            var availableHeight = rect.resizeTarget.parent ? rect.resizeTarget.parent.height : Screen.desktopAvailableHeight
+
+            if(xWidth+rect.resizeTarget.x<availableWidth && xWidth>minimumWidth){
                 rect.resizeTarget.width = xWidth
             }
             var yOffset = mouse.y-yPosition
@@ -178,13 +184,15 @@ Item {
         }
         onPositionChanged: {
             var xOffset = mouse.x-xPosition
-            if(rect.resizeTarget.x+xOffset>0 && rect.resizeTarget.width-xOffset>minimumWidth){
+            var availableWidth = rect.resizeTarget.parent ? rect.resizeTarget.parent.width:Screen.desktopAvailableWidth
+            var availableHeight = rect.resizeTarget.parent ? rect.resizeTarget.parent.height : Screen.desktopAvailableHeight
+            if(rect.resizeTarget.x+xOffset>0 && availableWidth-xOffset>minimumWidth){
                 rect.resizeTarget.x = rect.resizeTarget.x+xOffset
                 rect.resizeTarget.width = rect.resizeTarget.width-xOffset
             }
             var yOffset = mouse.y-yPosition
             var yHeight = rect.resizeTarget.height+yOffset
-            if(yHeight+rect.resizeTarget.y<rect.resizeTarget.parent.height && yHeight>minimumHeight){
+            if(yHeight+rect.resizeTarget.y<availableHeight && yHeight>minimumHeight){
                 rect.resizeTarget.height = yHeight
             }
         }
@@ -208,12 +216,15 @@ Item {
         onPositionChanged: {
             var xOffset = mouse.x-xPosition
             var xWidth = rect.resizeTarget.width+xOffset
-            if(xWidth+rect.resizeTarget.x<rect.resizeTarget.parent.width && xWidth>minimumWidth){
+            var availableWidth = rect.resizeTarget.parent ? rect.resizeTarget.parent.width:Screen.desktopAvailableWidth
+            var availableHeight = rect.resizeTarget.parent ? rect.resizeTarget.parent.height : Screen.desktopAvailableHeight
+
+            if(xWidth+rect.resizeTarget.x<availableWidth && xWidth>minimumWidth){
                 rect.resizeTarget.width = xWidth
             }
             var yOffset = mouse.y-yPosition
             var yHeight = rect.resizeTarget.height+yOffset
-            if(yHeight+rect.resizeTarget.y<rect.resizeTarget.parent.height && yHeight>minimumHeight){
+            if(yHeight+rect.resizeTarget.y<availableHeight && yHeight>minimumHeight){
                 rect.resizeTarget.height = yHeight
             }
         }
