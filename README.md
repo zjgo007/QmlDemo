@@ -7,8 +7,9 @@
 ![MapPainterPath](https://img-blog.csdnimg.cn/b30b5ec811644263bbf746f810dd2f4d.gif)</br>
 
 # ResizableRectangle
-　　 QML项目开发过程中，有时候需要对控件大小和位置‘进行人为调整，因此设计该组件。该组件鼠标置于边框和顶点位置时鼠标样式对应改变，拖动边框可修改该方向组件大小，拖动顶点可修改组件处横纵向组件大小。</br>
-![ResizableRectangle](https://img-blog.csdnimg.cn/5b64d9d45e5e49ad8ec69995290f4304.gif)
+　　 QML项目开发过程中，有时候需要对控件大小和位置‘进行人为调整，因此设计该组件。该组件鼠标置于边框和顶点位置时鼠标样式对应改变，拖动边框可修改该方向组件大小，拖动顶点可修改组件处横纵向组件大小。同时新增了对主窗体的拖拽支持！</br>
+![ResizableRectangle](https://img-blog.csdnimg.cn/5b64d9d45e5e49ad8ec69995290f4304.gif)</br>
+![ResizableRectangle](https://img-blog.csdnimg.cn/e406bfd95d1c4b7986019015068a24a9.gif)
 
 # MapLabel
 　　在地图上显示位置信息时，有时候需要同时显示该位置的详细信息。该组件可在地图上显示一个连接到地图地理位置的标签框，该标签框可点击进行拖拽。在地理位置改变、地图缩放、地图平移时，该标签框的相对位置保持不变。</br>
